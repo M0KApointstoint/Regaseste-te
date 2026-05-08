@@ -91,7 +91,7 @@ int destroy_trie(struct trie_node **root_adr)
 	return SUCCESS;
 }
 
-void print_buffer_dot(char *buffer)
+void print_buffer(char *buffer)
 {
 	while (*buffer) {
 		printf("%c -> ", *buffer);
@@ -104,7 +104,7 @@ void print_trie_helper(struct trie_node *node, char *buffer, int index)
 {
 	if (node->is_terminal) {
 		buffer[index] = 0;
-		print_buffer_dot(buffer);
+		print_buffer(buffer);
 	}
 	for (int i = 0; i < ALPHABET_LEN; ++i) {
 		if (node->children[i]) {
