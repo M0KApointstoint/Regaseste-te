@@ -14,5 +14,7 @@ int add_key_trie(struct trie_node **root_adr, char *key);
 
 int destroy_trie(struct trie_node **root_adr);
 
+int print_trie(struct trie_node *root);
+
 #endif
 
