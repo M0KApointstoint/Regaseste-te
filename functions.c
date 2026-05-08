@@ -1,7 +1,9 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "functions.h"
 
 #define ALPHABET_LEN 26
+#define BUFFER_LEN 100
 
 struct trie_node {
 	struct trie_node *children[ALPHABET_LEN];
@@ -86,6 +88,36 @@ int destroy_trie(struct trie_node **root_adr)
 	}
 	destroy_trie_helper(*root_adr);
 	*root_adr = NULL;
+	return SUCCESS;
+}
+
+void print_trie_helper(struct trie_node *node, char *buffer, int index)
+{
+	if (node->is_terminal) {
+		buffer[index] = 0;
+		printf("%s\n", buffer);
+	}
+	for (int i = 0; i < ALPHABET_LEN; ++i) {
+		if (node->children[i]) {
+			buffer[index] = i + 'a';
+			print_trie_helper(node->children[i], buffer, index + 1);
+		}
+	}
+}
+
+int print_trie(struct trie_node *root)
+{
+	if (!root) {
+		printf("The trie is empty!\n");
+		return INVALID_INPUT;
+	}
+	char *buffer = malloc(BUFFER_LEN);
+	if (!buffer) {
+		return MALLOC_ERROR;
+	}
+	int start_buffer_index = 0; // Never use magical numbers!
+	print_trie_helper(root, buffer, start_buffer_index);
+	free(buffer);
 	return SUCCESS;
 }
 
