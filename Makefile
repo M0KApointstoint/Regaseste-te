@@ -4,3 +4,6 @@ CFLAGS = -Wall -Wextra -std=c99 -g
 build:
 	$(CC) $(CFLAGS) main.c functions.c
 
+valgrind:
+	valgrind ./a.out
+
