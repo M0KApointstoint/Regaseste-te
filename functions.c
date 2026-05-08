@@ -54,3 +54,38 @@ int add_key_trie(struct trie_node **root_adr, char *key)
 	return add_key_trie_helper(*root_adr, key);
 }
 
+// Might need it, who knows.
+int has_children(struct trie_node *node)
+{
+	if (!node) {
+		return 0;
+	}
+	for (int i = 0; i < ALPHABET_LEN; ++i) {
+		if (node->children[i]) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void destroy_trie_helper(struct trie_node *node)
+{
+	if (!node) {
+		return;
+	}
+	for (int i = 0; i < ALPHABET_LEN; ++i) {
+		destroy_trie_helper(node->children[i]);
+	}
+	free(node);
+}
+
+int destroy_trie(struct trie_node **root_adr)
+{
+	if (!root_adr || !*root_adr) {
+		return INVALID_INPUT;
+	}
+	destroy_trie_helper(*root_adr);
+	*root_adr = NULL;
+	return SUCCESS;
+}
+
