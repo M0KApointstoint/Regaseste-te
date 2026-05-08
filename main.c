@@ -5,12 +5,31 @@ int main(void)
 {
 	// Testing:
 	struct trie_node *r = 0;
-
-	static char * const s[] = {"a", "ab", "abc", "zebra", "qweqweqwe", "a"};
-	int arr_len = sizeof(s) / sizeof(*s);
+	static char *const fruits[] = {
+	"apple",
+	"banana",
+	"cherry",
+	"date",
+	"elderberry",
+	"fig",
+	"grape",
+	"honeydew",
+	"kiwi",
+	"lemon",
+	"mango",
+	"nectarine",
+	"orange",
+	"papaya",
+	"quince",
+	"raspberry",
+	"strawberry",
+	"tangerine",
+	"watermelon"
+	};
+	int arr_len = sizeof(fruits) / sizeof(*fruits);
 	int exit_code = 123;
 	for (int i = 0; i < arr_len; ++i) {
-		exit_code = add_key_trie(&r, s[i]);
+		exit_code = add_key_trie(&r, fruits[i]);
 	}
 	exit_code = 123;
 	exit_code = print_trie(r);
